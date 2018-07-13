@@ -1,0 +1,60 @@
+
+    <div class="row">
+
+    {{!-- Burgers to eat --}}
+    <div class="col-md-3 col-sm-12 col-xs-12 center-align">
+        <h2 id ="mobile">Burgers Available To Eat!</h2>
+        <br>  
+        <ul>
+        {{#each burgers}}
+            {{#unless this.devoured}}
+            <div class="custom card light-green">
+                <p>
+                {{this.id}}. {{this.burger_name}}
+                    <form method="POST" action="/{{this.id}}?_method=PUT" >
+                        <input type="hidden" name="eat" value="true">
+                        <button type="submit" class="waves-effect waves-light btn green z-depth-4">DEVOUR IT!</button>
+                    </form>
+                </p>
+            </div>
+            {{/unless}}
+        {{/each}}
+        </ul>
+    </div>
+    <div class=" col-md-6 col-sm-12 col-xs-12"></div>
+    {{!-- Devoured Burgers --}}
+    <div class=" col-md-3 col-sm-12 col-xs-12 center-align">
+        <h2 id ="mobile" >Burgers That Have Been Eaten!</h2>
+        <br>
+        <ul>
+        {{#each burgers}}
+            {{#if this.devoured}}
+            <div class=" custom1 card light-green lighten-2">
+                <p class="grey-text">
+                 {{this.id}}. {{this.burger_name}} 
+                    <form method="POST" class="delete-form form-group" action="/{{this.id}}?_method=DELETE">
+            			<input type="image" class="trash-icon waves-effect waves-light  green z-depth-4" src="assets/images/trash4.png" alt="trash icon"/>
+                    </form>
+                </p>
+            </div>
+            {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div class ="row">
+        <div class="  col-md-4 col-sm-12 col-xs-12  "></div>
+        <div class="  custom col-md-4 col-sm-12 col-xs-12 card light-green  ">
+            <h3 class="heading">ADD BURGERS</h3>
+            <form method="POST" class="add-burger-form" action="/">
+                <div class="form-group">
+                    <input type="text" id="newBurger" name="name" placeholder="Burger name">
+                    <button type="submit" class="waves-effect waves-light btn green z-depth-4">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="  col-md-4 col-sm-12 col-xs-12  "></div>
+    </div>
+   
