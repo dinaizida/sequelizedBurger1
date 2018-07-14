@@ -25,10 +25,10 @@ app.use(methodOverride("_method"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Routes
+// Routes- 
 // =============================================================
-require("./routes/api-routes.js")(app);
-
+var router = require('./routes/api-routes.js');
+app.use('/', router);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync().then(function() {

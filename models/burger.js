@@ -1,13 +1,12 @@
-
-
+// created a table "Burgers " in the database "burger_db"
 module.exports = function(sequelize, DataTypes) {
-    var burger = sequelize.define("Burger", {
+    var Burger = sequelize.define("Burger", {
         burger_name: DataTypes.STRING,
         devoured: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         }
     });
-    return burger;
+    return Burger;
   };
   

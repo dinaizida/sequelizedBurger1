@@ -3,6 +3,8 @@ var express = require("express");
 var burger = require("../models/burger.js");
 var router = express.Router();
 
+var models = require('../models'); // Pulls out the Burger Models
+
 // gets all the burgers in the database
 router.get("/", function(req, res) {
 	burger.selectAll(function(data) {
