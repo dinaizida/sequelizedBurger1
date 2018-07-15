@@ -16,55 +16,86 @@ var db = require("../models");
 
 // get all the burgers in the db
 router.get("/", function(req, res) {
-	db.Burger.findAll({})
-	.then(function(data) {
-		//console.log(data);
-		return res.render("index", { burgers: data });
-	});
+    var query = {};
+    if (req.query.CustomerId) {
+        query.Customer = req.query.CustomerId;
+    }
+    // if the CustomerId field of the burgers table is not empty, include the customer of that id in the results
+    db.Burger.findAll({
+            include: db.Customer,
+            where: query
+        })
+        .then(function(data) {
+            //console.log(data);
+            return res.render("index", {
+                burgers: data
+            });
+        });
 });
 
 // add a burger
 router.post("/", function(req, res) {
-	//console.log(req.body);
-	db.Burger.create({
-		burger_name: req.body.name
-	})
-	.then(function() {
-        res.redirect("/");
-        
-    });
+    //console.log(req.body);
+    db.Burger.create({
+            burger_name: req.body.name
+        })
+        .then(function() {
+            res.redirect("/");
+
+        });
     console.log("Burger added: " + req.body.name);
 });
 
-// update a burger 
+// update a burger and enter customer name
 router.put("/:id", function(req, res) {
-	//console.log(req.body);
-	db.Burger.update(
-		{
-			devoured: true
-		}, {
-			where: {
-				id: req.params.id
-			}
-		}
-	).then(function() {
-		res.redirect("/");
-    });
-    console.log("Burger updated number: " + req.params.id);
+            console.log(req.body.eaten_by);
+
+            db.Customer.findAll({
+                    where: {
+                        customer_name: req.body.eaten_by
+                    }
+                })
+                .then(function(data) {
+                    if (data.length > 0) {
+                        // if customer already exists in database, devour burger
+                        console.log("customer already exists");
+                        devour(data[0].dataValues.id);
+                    } else {
+                        // if customer does not exist in database, create new customer, then devour burger
+                        console.log("creating new customer");
+                        db.Customer.create({
+                            customer_name: req.body.eaten_by
+						})
+						.then(function(data) {
+                                devour(data.dataValues.id);
+							});
+					}
+                    function devour(customer) {
+                        db.Burger.update({
+                            devoured: true,
+                            CustomerId: customer
+                        }, {
+                            where: {
+                                id: req.params.id
+                            }
+                        }).then(function() {
+                            res.redirect("/");
+                        });
+                        console.log("Burger updated number: " + req.params.id);
+                    };
+				});
 });
 
-// delete a burger
+ // delete a burger
 router.delete("/:id", function(req, res) {
-	db.Burger.destroy(
-		{
-			where: {
-				id: req.params.id
-			}
+	db.Burger.destroy({
+		where: {
+			id: req.params.id
 		}
-	).then(function() {
+	}).then(function() {
 		res.redirect("/");
-    });
-    console.log("Burger deleted number: " + req.params.id);
+	});
+	console.log("Burger deleted number: " + req.params.id);
 });
 
-module.exports = router;
+module.exports = router;           

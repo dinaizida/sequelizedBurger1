@@ -2,7 +2,7 @@
 
 ### sequelizedBurger1
 
-Deployed app on Heroku [here](https:).
+Deployed app on Heroku [here](https://boiling-meadow-30076.herokuapp.com/).
 
 # Project Description:
 Using the Sequelize ORM, the app has 3 basic CRUD functions. Sequelize is a promise-based Node.js ORM for MySQL.
@@ -16,7 +16,7 @@ A burger logger with MySQL, Node, Express, Handlebars and a homemade ORM (yum!).
 
 # Technologies Used: 
 
-Node.js, MySQL, Sequelize, Handlebars, Express, ORM, Materialize, Bootstrap, Affinity Photo. 
+Node.js, MySQL, Sequelize, Handlebars, Express, Materialize, Bootstrap, Affinity Photo. 
 
 
 ![Screen Shot](public/assets/images/burger.png)

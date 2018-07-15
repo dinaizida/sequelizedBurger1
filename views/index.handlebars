@@ -13,6 +13,8 @@
                 {{this.id}}. {{this.burger_name}}
                     <form method="POST" action="/{{this.id}}?_method=PUT" >
                         <input type="hidden" name="eat" value="true">
+                        {{!-- enter customer name here --}}
+						<input class="my-1" type="text" name="eaten_by"  placeholder="Eaten by"><br>
                         <button type="submit" class="waves-effect waves-light btn green z-depth-4">DEVOUR IT!</button>
                     </form>
                 </p>
@@ -31,7 +33,8 @@
             {{#if this.devoured}}
             <div class=" custom1 card light-green lighten-2">
                 <p class="grey-text">
-                 {{this.id}}. {{this.burger_name}} 
+                    {{!-- include name of the customer --}}
+                 {{this.id}}. {{this.burger_name}}. Eaten by {{this.Customer.dataValues.customer_name}} 
                     <form method="POST" class="delete-form form-group" action="/{{this.id}}?_method=DELETE">
             			<input type="image" class="trash-icon waves-effect waves-light  green z-depth-4" src="assets/images/trash4.png" alt="trash icon"/>
                     </form>
