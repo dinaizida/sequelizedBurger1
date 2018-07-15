@@ -34,7 +34,7 @@
             <div class=" custom1 card light-green lighten-2">
                 <p class="grey-text">
                     {{!-- include name of the customer --}}
-                 {{this.id}}. {{this.burger_name}}. Eaten by {{this.Customer.dataValues.customer_name}} 
+                 {{this.id}}. {{this.burger_name}}. Eaten by {{this.Customer.customer_name}} 
                     <form method="POST" class="delete-form form-group" action="/{{this.id}}?_method=DELETE">
             			<input type="image" class="trash-icon waves-effect waves-light  green z-depth-4" src="assets/images/trash4.png" alt="trash icon"/>
                     </form>

@@ -58,16 +58,17 @@ router.put("/:id", function(req, res) {
                 .then(function(data) {
                     if (data.length > 0) {
                         // if customer already exists in database, devour burger
-                        console.log("customer already exists");
-                        devour(data[0].dataValues.id);
+						console.log("customer already exists:  " + req.body.eaten_by);
+						console.log('data[0].id- ' + data[0].id);
+                        devour(data[0].id);
                     } else {
                         // if customer does not exist in database, create new customer, then devour burger
-                        console.log("creating new customer");
+                        console.log("creating new customer:  " + req.body.eaten_by) ;
                         db.Customer.create({
                             customer_name: req.body.eaten_by
 						})
 						.then(function(data) {
-                                devour(data.dataValues.id);
+                                devour(data.id);
 							});
 					}
                     function devour(customer) {
@@ -81,7 +82,7 @@ router.put("/:id", function(req, res) {
                         }).then(function() {
                             res.redirect("/");
                         });
-                        console.log("Burger updated number: " + req.params.id);
+                        console.log("Burger updated number: " + req.params.id + "   Burger Eaten by customer : " + req.body.eaten_by);
                     };
 				});
 });
