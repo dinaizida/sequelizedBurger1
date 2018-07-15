@@ -5,4 +5,4 @@ USE burgers_db;
 CREATE DATABASE burgers_db;
 --If the table already exists, remove it before trying to create the table again
 DROP TABLE IF EXISTS Burgers;
-DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS Customers;

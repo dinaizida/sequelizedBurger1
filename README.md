@@ -13,6 +13,8 @@ A burger logger with MySQL, Node, Express, Handlebars and a homemade ORM (yum!).
 * Each burger in the waiting area also has a button to eat it. When the user clicks it, the burger will move to the right side of the page.
 * Burgers on the right side of the page have a delete button to remove it from view.
 * The app stores every burger in a database, whether eaten or not.
+* Customer association added to the project. This involved creating one new Customer model and connecting it with a Burger model.
+* Validations added to Customer and Burger models.
 
 # Technologies Used: 
 
